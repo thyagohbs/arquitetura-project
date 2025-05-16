@@ -1,49 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import type { Statistic } from '../../domain/entities/Statistic';
-import { StatisticsApiRepository } from '../../infrastructure/api/StatisticApiRepository';
-import { getStatisticsUseCase } from '../../domain/usecases/getStatisticsUseCase';
-import { StatisticCard } from '../components/StatisticCard';
-import { StatisticsChart } from '../components/StatisticsChart';
+import { StatisticsList } from '../components/StatisticsList';
 
-const types = [
-    { label: 'Todos', value: '' },
-    { label: 'Engajamento', value: 'engajamento' },
-    { label: 'Financeiro', value: 'financeiro' },
-];
+// Interface de serviço para buscar estatísticas (DIP: abstração, não implementação concreta)
+interface StatisticsService {
+    getAll(): Promise<Statistic[]>;
+}
 
-export const DashboardPage: React.FC = () => {
+// DashboardPage: componente de alto nível que orquestra a busca e exibição dos dados.
+// DIP: recebe o serviço como prop, não depende de implementação concreta.
+// SRP: só coordena busca e exibição, não implementa lógica de dados.
+export const DashboardPage: React.FC<{ service: StatisticsService }> = ({ service }) => {
     const [statistics, setStatistics] = useState<Statistic[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [selectedType, setSelectedType] = useState('');
 
+    // Recebe o service via props e busca os dados
     useEffect(() => {
-        const repository = new StatisticsApiRepository();
-        const fetchStatistics = getStatisticsUseCase(repository);
+        service.getAll().then(setStatistics);
+    }, [service]);
 
-        setLoading(true);
-        fetchStatistics(selectedType || undefined)
-            .then(data => setStatistics(data))
-            .finally(() => setLoading(false));
-    }, [selectedType]);
-
-    return (
-        <div>
-            <h2>Dashboard de Estatísticas</h2>
-            <select value={selectedType} onChange={e => setSelectedType(e.target.value)}>
-                {types.map(t => (
-                    <option key={t.value} value={t.value}>{t.label}</option>
-                ))}
-            </select>
-            <StatisticsChart data={statistics} />
-            <div style={{ display: 'flex', gap: 16 }}>
-                {loading ? (
-                    <p>Carregando...</p>
-                ) : (
-                    statistics.map(stat => (
-                        <StatisticCard key={stat.id} statistic={stat} />
-                    ))
-                )}
-            </div>
-        </div>
-    );
+    // ISP: só passa para StatisticsList o que ela realmente precisa (a lista)
+    return <StatisticsList statistics={statistics} />;
 };

@@ -1,14 +1,12 @@
-// Componente de apresentação: exibe uma estatística na tela
 import React from 'react';
 import type { Statistic } from '../../domain/entities/Statistic';
 
-type Props = {
-    statistic: Statistic;
-};
-
-export const StatisticCard: React.FC<Props> = ({ statistic }) => (
+// Agora o componente aceita a prop opcional renderFooter
+export const StatisticCard: React.FC<{ statistic: Statistic; renderFooter?: () => React.ReactNode }> = ({ statistic, renderFooter }) => (
     <div>
         <h3>{statistic.label}</h3>
         <p>{statistic.value}</p>
+        {/* Só renderiza o footer se for passado */}
+        {renderFooter && <div>{renderFooter()}</div>}
     </div>
 );
