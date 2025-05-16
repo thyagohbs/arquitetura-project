@@ -1,24 +1,22 @@
-import { renderHook, act } from "@testing-library/react";
-import { useStatistics } from "./useStatistics";
+import { renderHook, act } from '@testing-library/react';
+import { expect, vi, describe, it } from 'vitest';
+import { useStatistics } from './useStatistics';
 
-// Mock do caso de uso
-jest.mock("../useCases/getStatistics", () => ({
-  getStatistics: () =>
-    Promise.resolve([
-      { id: "1", label: "Usuários", value: 100 },
-      { id: "2", label: "Vendas", value: 50 },
-    ]),
-}));
+describe('useStatistics', () => {
+  it('deve buscar e retornar estatísticas', async () => {
+    const mockService = {
+      getAll: vi.fn().mockResolvedValue([
+        { id: '1', label: 'Usuários', value: 100 },
+        { id: '2', label: 'Vendas', value: 50 },
+      ]),
+    };
 
-describe("useStatistics", () => {
-  it("deve buscar e retornar estatísticas", async () => {
-    const { result } = renderHook(() => useStatistics());
+    const { result } = renderHook(() => useStatistics(mockService));
 
-    // Aguarda o useEffect rodar
-    await act(async () => {});
+    await act(async () => { });
 
     expect(result.current.statistics).toHaveLength(2);
-    expect(result.current.statistics[0].label).toBe("Usuários");
+    expect(result.current.statistics[0].label).toBe('Usuários');
     expect(result.current.loading).toBe(false);
   });
 });

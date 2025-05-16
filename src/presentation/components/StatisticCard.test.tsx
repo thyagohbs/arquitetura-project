@@ -1,13 +1,13 @@
-import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import { StatisticCard } from "./StatisticCard";
+import { render, screen } from '@testing-library/react';
+import { expect, describe, it } from 'vitest';
+import { StatisticCard } from './StatisticCard';
 
-describe("StatisticCard", () => {
-  it("deve exibir o label e o valor da estatística", () => {
+describe('StatisticCard', () => {
+  it('exibe label e valor corretamente', () => {
     render(
-      <StatisticCard statistic={{ id: "1", label: "Testes", value: 42 }} />
+      <StatisticCard statistic={{ id: '1', label: 'Testes', value: 42 }} />
     );
-    expect(screen.getByText("Testes")).toBeInTheDocument();
-    expect(screen.getByText("42")).toBeInTheDocument();
+    expect(screen.getByText('Testes')).toBeInTheDocument();
+    expect(screen.getByText('42')).toBeInTheDocument();
   });
 });
