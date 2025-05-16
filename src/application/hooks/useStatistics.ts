@@ -1,8 +1,8 @@
 // Hook responsável por orquestrar a busca de estatísticas e expor para a UI
 import { useEffect, useState } from "react";
 import type { Statistic } from "../../domain/entities/Statistic";
-import { getStatistics } from "../../domain/usecases/getStatistics";
-
+import { getStatisticsUseCase } from "../../domain/usecases/getStatisticsUseCase";
+import { StatisticsApiRepository } from "../../infrastructure/api/StatisticApiRepository";
 export function useStatistics(type?: string) {
   // Hook para gerenciar o estado das estatísticas
   const [statistics, setStatistics] = useState<Statistic[]>([]);
@@ -11,7 +11,11 @@ export function useStatistics(type?: string) {
   useEffect(() => {
     // Busca as estatísticas ao montar o componente
     setLoading(true);
-    getStatistics(type).then((data) => {
+    const repository = new StatisticsApiRepository();
+    const fetchStatistics = getStatisticsUseCase(repository); // Aqui você passa o repositório
+
+    // Depois, passa o filtro (string ou undefined) para a função retornada
+    fetchStatistics(type || undefined).then((data: Statistic[]) => {
       setStatistics(data);
       setLoading(false);
     });

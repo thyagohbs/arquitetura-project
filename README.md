@@ -1,54 +1,42 @@
-# React + TypeScript + Vite
+# Dashboard de Estatísticas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Sobre
 
-Currently, two official plugins are available:
+Dashboard desenvolvido em React + TypeScript seguindo Clean Architecture e princípios SOLID.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Como rodar localmente
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```sh
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Rodando os testes
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```sh
+npm test
 ```
+
+## Estrutura de Pastas
+
+- `src/domain`: entidades e contratos
+- `src/application`: casos de uso e hooks
+- `src/infrastructure`: APIs e serviços externos
+- `src/presentation`: componentes e páginas React
+
+## Scripts úteis
+
+- `npm run dev`: inicia o servidor de desenvolvimento
+- `npm run build`: build de produção
+- `npm run test`: executa os testes automatizados
+- `npm run lint`: verifica padrões de código
+
+## Contribuição
+
+1. Crie uma branch a partir da `main`
+2. Faça commits claros e objetivos
+3. Abra um Pull Request para revisão
+
+## Documentação Adicional
+
+Para mais informações sobre o ciclo fundamental da aplicação, consulte o arquivo [docs/ciclo fundamental.md](docs/ciclo%20fundamental.md).

@@ -3,5 +3,5 @@ export interface Statistic {
   id: string; // Identificador único
   label: string; // Nome da estatística
   value: number; // Valor numérico
-  type: string; // novo campo para filtrar
+  type?: string; // campo para filtrar
 }

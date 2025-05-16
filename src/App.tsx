@@ -1,8 +1,8 @@
 // Ponto de entrada da aplicação: renderiza o Dashboard
-import { Dashboard } from './presentation/pages/Dashboard';
+import { DashboardPage } from './presentation/pages/DashboardPage';
 
 function App() {
-  return <Dashboard />;
+  return <DashboardPage />;
 }
 
 export default App;
