@@ -112,3 +112,7 @@ A disciplina em seguir Clean Architecture e SOLID é o que diferencia um projeto
 Repita o ciclo sempre que for adicionar ou modificar funcionalidades!
 
 ---
+
+## 5. Próximos Passos
+
+- [**Etapa Final: Consolidando Conhecimentos**](./etapa%20final.md)
