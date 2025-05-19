@@ -19,8 +19,8 @@ Antes de começar a codificar, compreenda **por que** usamos Clean Architecture 
 ### Etapa 1: Conceitos Fundamentais
 
 - **Leia:**
-  - [`docs/Clean Architecture/o que e.md`](../Clean%20Architecture/o%20que%20e.md)
-  - [`docs/SOLID/o que e.md`](./o%20que%20e.md)
+  - [`docs/Clean Architecture/o que e.md`](./Clean%20Architecture/o%20que%20e.md)
+  - [`docs/SOLID/o que e.md`](./SOLID/o%20que%20e.md)
 - **Objetivo:**  
   Entenda o que são Clean Architecture e SOLID, e por que são importantes para projetos escaláveis.
 
